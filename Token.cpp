@@ -1,39 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
+#include <iostream>
 #include "Token.h"
 #include "Tree.h"
 #include "y.tab.hpp"
 
+using namespace std;
 
-int Token::getAttr(int t) 
+void yyerror(char *);
+
+
+int Token::getAttribute(int token_type) 
 { 
-	if (t == NUMBER) 
+	switch(token_type) {
+	case NUMBER:
 		return attribute.ival;
-	else
+	case ADDOP:
 		return attribute.opval;
+	case MULOP:
+		return attribute.opval;
+	default:
+		yyerror("Error: getAttribute: unknown token type");
+	}
 }
 
-void Token::setAttr(int t, int v)
+void Token::setAttribute(int token_type, int v)
 { 
-	if (t == NUMBER) 
+	switch(token_type) {
+	case NUMBER:
 		attribute.ival = v; 
-	else attribute.opval = v; 
+		break;
+	case ADDOP: case MULOP:
+		attribute.opval = v; 
+		break;
+	default:
+		yyerror("Error: setAttribute: unknown token type");
+	}
 }
 
 void Token::show()
 {
 	switch(type) {
 	case NUMBER:
-		fprintf(stderr, "NUM[%d]\n", attribute.ival);
+		cerr << "NUM[" << attribute.ival << "]" << endl;
 		break;
 	case ADDOP:
-		fprintf(stderr, "ADDOP[%d]\n", attribute.opval);
+		fprintf(stderr, "ADDOP[%c]\n", attribute.opval);
 		break;
 	case MULOP:
-		fprintf(stderr, "MULOP[%d]\n", attribute.opval);
+		fprintf(stderr, "MULOP[%c]\n", attribute.opval);
 		break;
 	default:
-		fprintf(stderr, "[UNKNOWN]");
+		yyerror("Error: show: unknown type");
 	}
 }
 	

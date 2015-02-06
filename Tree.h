@@ -17,12 +17,15 @@ public:
 	Token getValue() { return value; }
 	Tree *getLeft() { return left; }
 	Tree *getRight() { return right; }
+
 	void setValue(Token v) { value = v; }
 	void setLeft(Tree *l) { left = l; }
 	void setRight(Tree *r) { right = r; }
 
 	void print(int spaces);
 	void print() { this->print(0); }
+
+	friend int eval(Tree *t);
 
 };
 

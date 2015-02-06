@@ -7,6 +7,7 @@ void Tree::print(int spaces)
 {
 	for (int i=0; i<spaces; i++)
 		fprintf(stderr, " ");
+
 	value.show();
 
 	if (left != NULL)

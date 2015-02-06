@@ -25,6 +25,7 @@ whitespace	[ \t]+
 
 void yyerror(char *msg)
 {
+	fprintf(stderr, "Error: %s\n", msg);
 	exit(1);
 }
 

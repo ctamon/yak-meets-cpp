@@ -12,12 +12,12 @@ private:
 
 public:
 	Token(int t):type(t) {}
-	Token(int t, int v):type(t)  { this->setAttr(t,v); }
+	Token(int t, int v):type(t)  { this->setAttribute(t,v); }
 	~Token() {}
 
 	int getType() { return type; }
-	int getAttr(int t);
-	void setAttr(int t, int v);
+	int getAttribute(int t);
+	void setAttribute(int t, int v);
 
 	void show();
 };
